@@ -18,9 +18,9 @@ class PostsModel extends BaseModel {
         if ($title == '' || $content == '') {
             return false;
         }
-        $statement = self::$db->prepare(
-            "INSERT INTO posts VALUES(NULL, ?)");
-        $statement->bind_param("si", $name);
+        $statement = self::
+        $db->prepare("INSERT INTO posts(title, content) VALUES(? , ?)");
+        $statement->bind_param("ss", $title,$content);
         $statement->execute();
         return $statement->affected_rows > 0;
     }
