@@ -92,23 +92,4 @@ abstract class BaseController {
         $this->addMessage(INFO_MESSAGES_SESSION_KEY, $infoMsg);
     }
 
-    protected function isLoggedIn() {
-        return isset($_SESSION['username']);
-    }
-
-    protected function isAdmin() {
-        return isset($_SESSION['isAdmin']);
-    }
-
-    protected function authorize() {
-        if (! $this->isLoggedIn()) {
-            $this->redirect("users", "login");
-        }
-    }
-
-    protected function authorizeAdmin() {
-        if (! $this->isAdmin()) {
-            die('Administrator account is required!');
-        }
-    }
 }

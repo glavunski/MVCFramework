@@ -8,10 +8,6 @@ class PostsController extends BaseController {
         $this->db = new PostsModel();
     }
 
-    public function index() {
-        $this->posts = $this->db->getAll();
-    }
-
     public function create() {
         if ($this->isPost()) {
             $title = $_POST['title'];
@@ -26,7 +22,7 @@ class PostsController extends BaseController {
     }
 
     public function delete($id) {
-        if ($this->db->deletePost($id)) {
+        if ($this->db->delete($id)) {
             $this->addInfoMessage("Post deleted.");
         } else {
             $this->addErrorMessage("Cannot delete post.");

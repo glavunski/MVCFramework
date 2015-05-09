@@ -2,7 +2,10 @@
 
 class PostsModel extends BaseModel {
     public function getAll() {
-        $statement = self::$db->query("SELECT * FROM posts");
+        $statement = self::$db->query(
+        "SELECT p.id,p.title,p.content,p.date_stamp,u.id as user_id,u.username
+        FROM posts as p
+        JOIN users as u on p.user_id = u.id;");
         return $statement->fetch_all(MYSQLI_ASSOC);
     }
 

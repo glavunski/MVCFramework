@@ -1,25 +1,25 @@
 <?php
 
-class AuthorsModel extends BaseModel {
+class UsersModel extends BaseModel {
     public function getAll() {
-        $statement = self::$db->query("SELECT * FROM authors");
+        $statement = self::$db->query("SELECT * FROM users");
         return $statement->fetch_all(MYSQLI_ASSOC);
     }
 
     public function find($id) {
         $statement = self::$db->prepare(
-            "SELECT * FROM authors WHERE id = ?");
+            "SELECT * FROM users WHERE id = ?");
         $statement->bind_param("i", $id);
         $statement->execute();
         return $statement->get_result()->fetch_assoc();
     }
 
-    public function create($name) {
-        if ($name == '') {
+    public function create($username,$password) {
+        if ($username == '' || $password == '' ) {
             return false;
         }
         $statement = self::$db->prepare(
-            "INSERT INTO authors VALUES(NULL, ?)");
+            "INSERT INTO users VALUES(NULL, ?)");
         $statement->bind_param("s", $name);
         $statement->execute();
         return $statement->affected_rows > 0;
@@ -30,7 +30,7 @@ class AuthorsModel extends BaseModel {
             return false;
         }
         $statement = self::$db->prepare(
-            "UPDATE authors SET name = ? WHERE id = ?");
+            "UPDATE users SET username = ? WHERE id = ?");
         $statement->bind_param("si", $name, $id);
         $statement->execute();
         return $statement->errno == 0;
@@ -38,7 +38,7 @@ class AuthorsModel extends BaseModel {
 
     public function delete($id) {
         $statement = self::$db->prepare(
-            "DELETE FROM authors WHERE id = ?");
+            "DELETE FROM users WHERE id = ?");
         $statement->bind_param("i", $id);
         $statement->execute();
         return $statement->affected_rows > 0;

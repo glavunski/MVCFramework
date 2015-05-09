@@ -1,12 +1,12 @@
-<h1>Edit Existing Author</h1>
+<h1>Edit Existing User</h1>
 
-<?php if ($this->author) { ?>
-<form method="post" action="/authors/edit/<?= $this->author['id'] ?>">
+<?php if ($this->user) { ?>
+<form method="post" action="/users/edit/<?= $this->user['id'] ?>">
     Author name:
     <input type="text" name="name"
-        value="<?= htmlspecialchars($this->author['name']) ?>" />
+        value="<?= htmlspecialchars($this->user['username']) ?>" />
     <br/>
     <input type="submit" value="Edit" />
-    <a href="/authors">Cancel</a>
+    <a href="/users">Cancel</a>
 </form>
 <?php } ?>

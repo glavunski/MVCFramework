@@ -1,4 +1,12 @@
-    <footer>(c) 2014 MVC Example</footer>
+<footer class="footer navbar-fixed-bottom text-center">
+    <div class="row">
+        <div class="col-lg-12">
+            <p>(c) 2015 MVC Example</p>
+        </div>
+    </div>
+</footer>
+</div>
+
 </body>
 
 </html>
