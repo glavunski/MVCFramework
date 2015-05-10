@@ -1,7 +1,9 @@
 <?php
 
+
 class HomeController extends BaseController {
-    private $db;
+    protected $db;
+    protected $posts;
 
     protected function onInit() {
         $this->title = 'Welcome';
@@ -11,4 +13,5 @@ class HomeController extends BaseController {
     public function index() {
         $this->posts = $this->db->getAll();
     }
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-class UsersModel extends BaseModel {
+class AdminModel extends BaseModel {
     public function getAll() {
         $statement = self::$db->query("SELECT * FROM users");
         return $statement->fetch_all(MYSQLI_ASSOC);
@@ -19,8 +19,8 @@ class UsersModel extends BaseModel {
             return false;
         }
         $statement = self::$db->prepare(
-            "INSERT INTO users VALUES(NULL, ?)");
-        $statement->bind_param("s", $name);
+            "INSERT INTO users VALUES(NULL, ?, ?)");
+        $statement->bind_param("ss", $name);
         $statement->execute();
         return $statement->affected_rows > 0;
     }

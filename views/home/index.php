@@ -1,4 +1,3 @@
-
 <div class="container">
 <div class="row">
 
@@ -7,7 +6,7 @@
         <h1 class="page-header">My Blog  </h1>
         <?php foreach ($this->posts as $post) : ?>
             <h2>
-                <a href="#"><?= htmlspecialchars($post['title']) ?></a>
+                <a href="/posts/view/<?= $post['id']?>"><?= htmlspecialchars($post['title']) ?></a>
             </h2>
             <p class="lead">
                 by <a href="index.php"><?= htmlspecialchars($post['username']) ?></a>
@@ -18,9 +17,15 @@
                 <?= htmlspecialchars($post['date_stamp']) ?>
             </p>
             <p><?= htmlspecialchars(substr($post['content'],0,100)) ?></p>
-            <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-            <a href="/posts/edit/<?=$post['id'] ?>">[Edit]</a>
-            <a href="/posts/delete/<?=$post['id'] ?>">[Delete]</a>
+            <p class="lead">
+                by <a href="index.php"><?= htmlspecialchars($post['username']) ?></a>
+            </p>
+            <?php if($this->auth->isLoggedIn()
+                && $this->auth->get_logged_user()[0] == $post['username']
+                || $this->auth->isAdmin()): ?>
+                <a class="btn btn-primary" href="/posts/edit/<?=$post['id'] ?>">Edit</a>
+                <a class="btn btn-danger" href="/posts/delete/<?=$post['id'] ?>">Delete</a>
+            <?php endif ?>
             <hr>
         <?php endforeach ?>
 
@@ -28,10 +33,10 @@
         <!-- Pager -->
         <ul class="pager">
             <li class="previous">
-                <a href="#">< Older</a>
+                <a href="/posts/page/<?= $this->page - 1?>/<?= $this->pagesize ?>">< Older</a>
             </li>
             <li class="next">
-                <a href="#">Newer ></a>
+                <a href="/posts/page/<?= $this->page + 1?>//<?= $this->pagesize ?>">Newer ></a>
             </li>
         </ul>
 

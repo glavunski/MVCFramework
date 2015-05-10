@@ -5,11 +5,16 @@ abstract class BaseController {
     protected $action;
     protected $layout = DEFAULT_LAYOUT;
     protected $viewBag = [];
+    protected $messages;
     protected $viewRendered = false;
+    protected $title;
+    protected $auth;
 
     public function __construct($controller, $action) {
         $this->controller = $controller;
         $this->action = $action;
+        $this->messages = new Message();
+        $this->auth = Auth::get_instance();
         $this->onInit();
     }
 
@@ -31,7 +36,8 @@ abstract class BaseController {
     }
 
     protected function onInit() {
-        // Override this function in subclasses to initialize the controller
+        // Override this function in subclasses to initialize
+        // the controller
     }
 
     public function index() {
@@ -76,20 +82,9 @@ abstract class BaseController {
         return $_SERVER['REQUEST_METHOD'] == 'POST';
     }
 
-    private function addMessage($msgSessionkey, $msgText) {
-        if (!isset($_SESSION[$msgSessionkey])) {
-            $_SESSION[$msgSessionkey] = [];
-        }
-        array_push($_SESSION[$msgSessionkey], $msgText);
-
-    }
-
-    protected function addErrorMessage($errorMsg) {
-        $this->addMessage(ERROR_MESSAGES_SESSION_KEY, $errorMsg);
-    }
-
-    protected function addInfoMessage($infoMsg) {
-        $this->addMessage(INFO_MESSAGES_SESSION_KEY, $infoMsg);
+    public function logout(){
+        session_destroy();
+        $this->redirect("home");
     }
 
 }

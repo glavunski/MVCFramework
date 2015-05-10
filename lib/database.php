@@ -1,5 +1,5 @@
 <?php
-namespace Lib;
+
 class Database {
 
     private static $db = null;

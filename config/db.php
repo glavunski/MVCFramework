@@ -5,10 +5,11 @@ define('DEFAULT_ACTION', 'index');
 define('DEFAULT_VIEW', 'index');
 define('DEFAULT_LAYOUT', 'default');
 
-define('DB_HOST', 'https://my-mvcblog.rhcloud.com/phpmyadmin/');
-define('DB_USER', 'adminGHgLAl8');
-define('DB_PASS', '__iLiFsmX2jy');
-define('DB_NAME', 'my');
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '123321');
+define('DB_NAME', 'mvc');
+define('LN_ROOT_PATH', dirname(basename(dirname(__FILE__)) . '/'));
 
 define('INFO_MESSAGES_SESSION_KEY', 'infoMessages');
 define('ERROR_MESSAGES_SESSION_KEY', 'errorMessages');

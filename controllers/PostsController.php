@@ -8,25 +8,55 @@ class PostsController extends BaseController {
         $this->db = new PostsModel();
     }
 
+    public function index(){
+        $this->redirect("home");
+    }
+
     public function create() {
+        $this->auth->authorizeUser();
         if ($this->isPost()) {
+            $userId = $this->auth->get_logged_user()[1];
             $title = $_POST['title'];
             $content = $_POST['content'];
-            if ($this->db->create($title,$content)) {
-                $this->addInfoMessage("Post created.");
+            $tags = $_POST['tags'];
+            if ($this->db->create($title,$content,$tags,$userId)) {
+                $this->messages->addInfoMessage("Post created.");
                 $this->redirect('posts');
             } else {
-                $this->addErrorMessage("Error creating post.");
+                $this->messages->addErrorMessage("Error creating post.");
             }
         }
     }
 
     public function delete($id) {
         if ($this->db->delete($id)) {
-            $this->addInfoMessage("Post deleted.");
+            $this->messages->addInfoMessage("Post deleted.");
         } else {
-            $this->addErrorMessage("Cannot delete post.");
+            $this->messages->addErrorMessage("Cannot delete post.");
         }
-        $this->redirect('posts');
+        $this->redirect('home');
     }
+
+    public function view($id){
+        $post = $this->db->find($id);
+        if(empty($post)) {
+            die('No post to view here');
+        }
+        $this->post = $post;
+    }
+
+    public function page($p = 0,$ps = 10){
+        $this->page = $p;
+        $this->pagesize = $ps;
+
+        if($p <= 1){
+            $this->redirect('home');
+        }
+        $this->posts = $this->db->getFilteredPosts($p,$ps);
+    }
+
+    public function tags($tagname){
+
+    }
+
 }

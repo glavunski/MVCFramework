@@ -23,27 +23,30 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <?php if(empty( $this->logged_user )): ?>
+                        <?php if (!$this->auth->isLoggedIn()): ?>
                         <li>
-                            <a href="/users/login">Login</a>
+                            <a href="/login">Login</a>
                         </li>
                         <li>
-                            <a href="/users/register">Register</a>
+                            <a href="/register">Register</a>
                         </li>
                         <?php endif ?>
-                        <?php if ($this->isAdmin): ?>
+                        <?php if ($this->auth->isAdmin()): ?>
                         <li>
                             <a href="/admin">Admin</a>
                         </li>
                         <?php endif ?>
                     </ul>
-                    <?php if (!empty( $this->logged_user )): ?>
+                    <?php if ($this->auth->isLoggedIn()): ?>
                     <ul class="nav navbar-nav">
                         <li>
-                            <span><?php echo $this->logged_user['username']; ?></span>
+                            <a href="#"><?php echo $this->auth->get_logged_user()[0]; ?></a>
                         </li>
                         <li>
-                            <a href="/users/logout">Logout</a>
+                            <a href="/posts/create">New Post</a>
+                        </li>
+                        <li>
+                            <a href="/logout">Logout</a>
                         </li>
                     </ul>
                     <?php endif ?>
