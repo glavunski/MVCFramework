@@ -2,7 +2,7 @@
 
 class AdminController extends BaseController {
     private $db;
-    private $users;
+    protected $users;
 
     public function onInit() {
         $this->title = "Admin";
@@ -20,6 +20,6 @@ class AdminController extends BaseController {
         } else {
             $this->messages->addErrorMessage("Cannot delete user.");
         }
-        $this->redirect('users');
+        $this->redirect('admin');
     }
 }

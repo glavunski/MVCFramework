@@ -29,6 +29,7 @@ class PostsController extends BaseController {
     }
 
     public function delete($id) {
+        $this->auth->authorizeUser();
         if ($this->db->delete($id)) {
             $this->messages->addInfoMessage("Post deleted.");
         } else {
@@ -45,7 +46,7 @@ class PostsController extends BaseController {
         $this->post = $post;
     }
 
-    public function page($p = 0,$ps = 10){
+    public function page($p = 0,$ps = 5){
         $this->page = $p;
         $this->pagesize = $ps;
 
@@ -58,5 +59,4 @@ class PostsController extends BaseController {
     public function tags($tagname){
 
     }
-
 }

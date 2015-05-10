@@ -120,6 +120,11 @@ class PostsModel extends BaseModel {
     }
 
     public function delete($id) {
+        $postTagsStatement = self::$db->prepare(
+            "DELETE FROM posts_tags WHERE post_id = ?");
+        $postTagsStatement->bind_param("i", $id);
+        $postTagsStatement->execute();
+
         $statement = self::$db->prepare(
             "DELETE FROM posts WHERE id = ?");
         $statement->bind_param("i", $id);

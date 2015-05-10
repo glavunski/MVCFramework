@@ -8,9 +8,6 @@
             <h2>
                 <a href="/posts/view/<?= $post['id']?>"><?= htmlspecialchars($post['title']) ?></a>
             </h2>
-            <p class="lead">
-                by <a href="index.php"><?= htmlspecialchars($post['username']) ?></a>
-            </p>
             <p>
                 <span class="glyphicon glyphicon-time">
                 </span>
@@ -23,8 +20,8 @@
             <?php if($this->auth->isLoggedIn()
                 && $this->auth->get_logged_user()[0] == $post['username']
                 || $this->auth->isAdmin()): ?>
-                <a class="btn btn-primary" href="/posts/edit/<?=$post['id'] ?>">Edit</a>
-                <a class="btn btn-danger" href="/posts/delete/<?=$post['id'] ?>">Delete</a>
+                <a class="btn btn-primary" href="/posts/edit/<?=$post['id']?>">Edit</a>
+                <a class="btn btn-danger" href="/posts/delete/<?=$post['id']?>">Delete</a>
             <?php endif ?>
             <hr>
         <?php endforeach ?>
